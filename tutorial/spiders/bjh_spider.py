@@ -2,8 +2,10 @@
 import scrapy
 
 def printhxs(hxs):
+    str = ""
     for i in hxs:
-        print i.encode('utf-8')
+        str += i.encode('utf-8')
+    print str
 
 class QuotesSpider(scrapy.Spider):
     name = "bjh"
