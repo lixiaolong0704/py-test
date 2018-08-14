@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
-def printhxs(hxs):
-    str = ""
-    for i in hxs:
-        str += i.encode('utf-8')
-    print str
+from  .. utilities import printhxs
 
 class QuotesSpider(scrapy.Spider):
     name = "bjh"
