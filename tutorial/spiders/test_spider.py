@@ -1,7 +1,7 @@
 import scrapy
 
 class QuotesSpider(scrapy.Spider):
-    name = "iciba"
+    name = "test"
 
     def start_requests(self):
         urls = [
