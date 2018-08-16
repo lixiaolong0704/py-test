@@ -7,6 +7,9 @@
 
 import json
 import codecs
+from utilities import toZh
+
+
 class TutorialPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -16,21 +19,27 @@ class TestPipeline(object):
 
     def open_spider(self, spider):
         pass
+
     def close_spider(self, spider):
         pass
 
     def process_item(self, item, spider):
-        print item["name"]
         return item
+
+
 class JsonWriterPipeline(object):
 
     def open_spider(self, spider):
-        self.file = codecs.open('items.jl', 'w',encoding='utf-8' )
+        self.file = codecs.open('items.txt', 'w', encoding='utf-8')
 
     def close_spider(self, spider):
         self.file.close()
 
     def process_item(self, item, spider):
-        line = json.dumps(dict(item),ensure_ascii=False,indent=2) + "\n"
+
+        # x = toZh(json.dumps(dict(item), indent=2))
+        # print item["name"]
+
+        line = item["name"] + ":" + item["key"] + "\n"
         self.file.write(line)
         return item

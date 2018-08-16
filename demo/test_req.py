@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import requests
 import threading
 import time
+import sys
 # r = requests.get('https://api.github.com/events')
 # print(r.text)
 
@@ -31,7 +33,11 @@ def sleeper():
         time.sleep(num)
         print('After: %s\n' % time.ctime())
 try:
-    sleeper()
+    # sleeper()
+    print '中文'.decode('utf8')
+    print sys.getdefaultencoding()
+
+
 except KeyboardInterrupt:
     print('\n\nKeyboard exception received. Exiting.')
     exit()

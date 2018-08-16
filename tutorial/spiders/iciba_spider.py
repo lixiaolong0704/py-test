@@ -7,6 +7,11 @@ from ..items import *
 
 pat = re.compile(r'\s+')
 
+# re.sub(r"\b(this|string)\b", r"<markup>\1</markup>", "this is my string")
+def getKey(cate):
+    tk= pat.sub('', pinyin.get(cate, format="strip", delimiter="").lower())
+    return re.sub(r"[^a-zA-Z]",'',tk)
+
 
 class IcibaSpider(scrapy.Spider):
     name = "iciba"
@@ -32,9 +37,10 @@ class IcibaSpider(scrapy.Spider):
             cate = it.xpath("./h2/text()").extract_first()
             if cate is None:
                 continue
-            key = pat.sub('', pinyin.get(cate, format="strip", delimiter="").lower())
+
+            key = getKey(cate)
             item = CategoryItem()
-            item['name'] = toZh(cate)
+            item['name'] = cate
             item['key'] = key
             item['parent'] = 0
             level1Items.append(item)
@@ -43,9 +49,9 @@ class IcibaSpider(scrapy.Spider):
 
             for it2 in level2:
                 cate2 = it2.xpath("./h3/text()").extract_first()
-                key2 = pat.sub('', pinyin.get(cate2, format="strip", delimiter="").lower())
+                key2 = getKey(cate2)
                 item = CategoryItem()
-                item['name'] = toZh(cate2)
+                item['name'] = cate2
                 item['key'] = key2
                 item['parent'] = key
                 allItems.append(item)
@@ -53,8 +59,8 @@ class IcibaSpider(scrapy.Spider):
                 for it3 in level3:
                     cate3 = it3.xpath("./a/h4/text()").extract_first()
                     item = CategoryItem()
-                    item['name'] = toZh(cate3)
-                    item['key'] = pat.sub('', pinyin.get(cate3, format="strip", delimiter="").lower())
+                    item['name'] = cate3
+                    item['key'] = getKey(cate3)
                     item['parent'] = key2
                     allItems.append(item)
 
