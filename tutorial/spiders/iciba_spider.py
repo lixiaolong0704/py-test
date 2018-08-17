@@ -7,10 +7,11 @@ from ..items import *
 
 pat = re.compile(r'\s+')
 
+
 # re.sub(r"\b(this|string)\b", r"<markup>\1</markup>", "this is my string")
 def getKey(cate):
-    tk= pat.sub('', pinyin.get(cate, format="strip", delimiter="").lower())
-    return re.sub(r"[^a-zA-Z]",'',tk)
+    tk = pat.sub('', pinyin.get(cate, format="strip", delimiter="").lower())
+    return 'key_' + re.sub(r"[^a-zA-Z\d]", '', tk)
 
 
 class IcibaSpider(scrapy.Spider):
@@ -18,7 +19,7 @@ class IcibaSpider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'http://word.iciba.com/?action=index&reselect=y'
+            'http://word.iciba.com'
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -33,7 +34,7 @@ class IcibaSpider(scrapy.Spider):
         allItems = []
         level1 = response.xpath('//div[@class="main_l"]')
 
-        for index,it in enumerate(level1):
+        for index, it in enumerate(level1):
             cate = it.xpath("./h2/text()").extract_first()
             if cate is None:
                 continue
@@ -62,6 +63,15 @@ class IcibaSpider(scrapy.Spider):
                     item['name'] = cate3
                     item['key'] = getKey(cate3)
                     item['parent'] = key2
+
+                    classId = it3.xpath("./@class_id").extract_first()
+                    item['classId'] = int(classId)
+                    item['tag'] = "?action=courses&classid=" + classId
+
+                    countBlock = it3.xpath("./a/p/text()").extract()
+                    item['wordCount'] = int(re.sub('[^\d]*', '', countBlock[0]))
+                    item['courseCount'] = int(re.sub('[^\d]*', '', countBlock[1]))
+
                     allItems.append(item)
 
             # level2 = cate.xpath('//li/h3/text()').extract()
@@ -79,9 +89,9 @@ class IcibaSpider(scrapy.Spider):
         #          printhxs(td)
         # printhxs(str(text))
 
-        # filename = 'word.iciba-%s.html' % page
-        # with open(filename, 'wb') as f:
-        #     f.write(response.body)
-        # self.log('保存 Saved file %s' % filename)
+        filename = 'word.iciba-%s.html' % page
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+        self.log('保存 Saved file %s' % filename)
 
         return allItems

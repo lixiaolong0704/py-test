@@ -19,9 +19,11 @@ class CategoryItem(Item):
     # name = Field()
     name = Field()
     wordCount= Field()
-    classCount = Field()
+    courseCount = Field()
+    classId = Field()
     key = Field()
     parent = Field()
+    tag = Field()
 
 
 class WordItem(Item):

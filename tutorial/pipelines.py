@@ -8,6 +8,7 @@
 import json
 import codecs
 from utilities import toZh
+from pymongo import MongoClient
 
 
 class TutorialPipeline(object):
@@ -27,6 +28,24 @@ class TestPipeline(object):
         return item
 
 
+class MongoWriterPipeline(object):
+
+    def __init__(self):
+        self.connection = MongoClient('localhost', 27017)
+        self.db = self.connection['moli_word']
+        self.categories = self.db['categories']
+        if self.categories is not None:
+            self.categories.remove()
+
+    def process_item(self, item, spider):
+        self.categories.insert(dict(item))
+
+        return item
+
+    def close_spider(self, spider):
+        self.connection.close()
+
+
 class JsonWriterPipeline(object):
 
     def open_spider(self, spider):
@@ -36,7 +55,6 @@ class JsonWriterPipeline(object):
         self.file.close()
 
     def process_item(self, item, spider):
-
         # x = toZh(json.dumps(dict(item), indent=2))
         # print item["name"]
 
