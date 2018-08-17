@@ -35,17 +35,19 @@ class IcibaSpider(scrapy.Spider):
         classId =  item['classId']
         courseCount =item['courseCount']
         key = item['key']
-        print '************************xxx'+ str(courseCount)
         if courseCount is not None:
-            print '************************'
-            return response.follow(self.getCourseUrl(classId,1), callback=self.parseCourse)
+            for x in range(courseCount):
+              yield response.follow(self.getCourseUrl(classId, x+1), callback=self.parseCourse)
+
 
 
     def parseCourse(self,response):
-        filename = 'word.iciba-xx.html'
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log('test file %s' % filename)
+        # filename = 'word.iciba-xx.html'
+        # with open(filename, 'wb') as f:
+        print '********************************'
+        print response.url
+        #     f.write(response.body)
+        # self.log('test file %s' % filename)
         yield None
     def parse(self, response):
         page = response.url.split("/")[-2]
@@ -82,8 +84,14 @@ class IcibaSpider(scrapy.Spider):
                 item['hasChild'] = int(it2.xpath("./@has_child").extract_first())
                 item['classId'] = it2.xpath("./@class_id").extract_first()
 
-                # if item['hasChild'] == 0:
-                #     yield self.doClass(response,item)
+                shit = it2.xpath("./p/text()").extract_first() #261课，5198词
+                shits = re.findall(r'\d+', shit)
+
+                item['wordCount'] = int(shits[0])
+                item['courseCount'] = int(shits[1])
+                if item['hasChild'] == 0:
+                    for ttt in self.doClass(response,item):
+                            yield ttt
                 allItems.append(item)
                 yield item
                 level3 = it2.xpath('./div[@class="main_l_box"]/ol/li')
@@ -101,7 +109,8 @@ class IcibaSpider(scrapy.Spider):
                     countBlock = it3.xpath("./a/p/text()").extract()
                     item['wordCount'] = int(re.sub('[^\d]*', '', countBlock[0]))
                     item['courseCount'] = int(re.sub('[^\d]*', '', countBlock[1]))
-                    yield self.doClass(response,item)
+                    for ttt in self.doClass(response,item):
+                        yield ttt
                     allItems.append(item)
                     yield item
 
