@@ -9,6 +9,7 @@ import json
 import codecs
 from utilities import toZh
 from pymongo import MongoClient
+import sys
 
 
 class TutorialPipeline(object):
@@ -36,7 +37,9 @@ class TestPipeline(object):
                 print item['name']
 
             if 'word' in item:
-                print item['word']
+                # print item['word']
+                sys.stdout.write('x****'+item['word']+'----')
+                sys.stdout.flush()
 
             return item
         except Exception, e:
@@ -63,7 +66,9 @@ class MongoWriterPipeline(object):
             if t is not None:
                 t.remove()
         if 'word' in item:
-            print item['word']
+            # print item['word']
+            sys.stdout.write(item['word']+',')
+            sys.stdout.flush()
             self.db[item['category']].insert(dict(item))
 
 

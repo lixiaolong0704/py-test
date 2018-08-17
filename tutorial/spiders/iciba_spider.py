@@ -4,9 +4,9 @@ from ..utilities import printhxs, toZh
 import pinyin
 import re
 from ..items import *
+import sys
 
 pat = re.compile(r'\s+')
-
 
 # re.sub(r"\b(this|string)\b", r"<markup>\1</markup>", "this is my string")
 def getKey(cate):
@@ -81,7 +81,9 @@ class IcibaSpider(scrapy.Spider):
             courseCount = item['courseCount']
             # courseCount = 5
             for x in range(courseCount):
-                print 'courseId:' + str(x+1)
+                print ' '
+                print "category: %-10s courseId: %-4d courseCount: %-4d" % (item['name'],x+1,courseCount)
+                print ' '
                 yield response.follow(self.getCourseUrl(classId, x + 1), callback=self.parseCourse,
                                       meta={'item': item,'courseId':x+1})
 
@@ -119,9 +121,8 @@ class IcibaSpider(scrapy.Spider):
 
                 shit = it2.xpath("./p/text()").extract_first()  # 261课，5198词
                 shits = re.findall(r'\d+', shit)
-
-                item['wordCount'] = int(shits[0])
-                item['courseCount'] = int(shits[1])
+                item['courseCount'] = int(shits[0])
+                item['wordCount'] = int(shits[1])
                 if item['hasChild'] == 0:
                     allitems.append(item)
                     # for ttt in self.doClass(response,item):
@@ -142,8 +143,8 @@ class IcibaSpider(scrapy.Spider):
                     item['tag'] = self.getClassUrl(item['classId'])
 
                     countBlock = it3.xpath("./a/p/text()").extract()
-                    item['wordCount'] = int(re.sub('[^\d]*', '', countBlock[0]))
-                    item['courseCount'] = int(re.sub('[^\d]*', '', countBlock[1]))
+                    item['wordCount'] = int(re.sub('[^\d]*', '', countBlock[1]))
+                    item['courseCount'] = int(re.sub('[^\d]*', '', countBlock[0]))
                     # for ttt in self.doClass(response,item):
                     #     yield ttt
                     allitems.append(item)
