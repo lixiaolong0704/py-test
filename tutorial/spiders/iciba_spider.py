@@ -17,13 +17,36 @@ def getKey(cate):
 class IcibaSpider(scrapy.Spider):
     name = "iciba"
 
+    allowed_domains = ['word.iciba.com']
     def start_requests(self):
         urls = [
-            'http://word.iciba.com'
+            'http://word.iciba.com/'
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
+    def getClassUrl(self, classId):
+        return "?action=courses&classid=" + str(classId)
+
+    def getCourseUrl(self, classId, courseId):
+        return "?action=words&class=" + str(classId) + "&course=" + str(courseId)
+
+    def doClass(self,response, item):
+        classId =  item['classId']
+        courseCount =item['courseCount']
+        key = item['key']
+        print '************************xxx'+ str(courseCount)
+        if courseCount is not None:
+            print '************************'
+            return response.follow(self.getCourseUrl(classId,1), callback=self.parseCourse)
+
+
+    def parseCourse(self,response):
+        filename = 'word.iciba-xx.html'
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+        self.log('test file %s' % filename)
+        yield None
     def parse(self, response):
         page = response.url.split("/")[-2]
         self.log('----I love you------------------------------------------------')
@@ -47,7 +70,7 @@ class IcibaSpider(scrapy.Spider):
             level1Items.append(item)
             allItems.append(item)
             level2 = it.xpath("./ul/li")
-
+            yield item
             for it2 in level2:
                 cate2 = it2.xpath("./h3/text()").extract_first()
                 key2 = getKey(cate2)
@@ -55,7 +78,14 @@ class IcibaSpider(scrapy.Spider):
                 item['name'] = cate2
                 item['key'] = key2
                 item['parent'] = key
+
+                item['hasChild'] = int(it2.xpath("./@has_child").extract_first())
+                item['classId'] = it2.xpath("./@class_id").extract_first()
+
+                # if item['hasChild'] == 0:
+                #     yield self.doClass(response,item)
                 allItems.append(item)
+                yield item
                 level3 = it2.xpath('./div[@class="main_l_box"]/ol/li')
                 for it3 in level3:
                     cate3 = it3.xpath("./a/h4/text()").extract_first()
@@ -66,13 +96,14 @@ class IcibaSpider(scrapy.Spider):
 
                     classId = it3.xpath("./@class_id").extract_first()
                     item['classId'] = int(classId)
-                    item['tag'] = "?action=courses&classid=" + classId
+                    item['tag'] = self.getClassUrl(item['classId'])
 
                     countBlock = it3.xpath("./a/p/text()").extract()
                     item['wordCount'] = int(re.sub('[^\d]*', '', countBlock[0]))
                     item['courseCount'] = int(re.sub('[^\d]*', '', countBlock[1]))
-
+                    yield self.doClass(response,item)
                     allItems.append(item)
+                    yield item
 
             # level2 = cate.xpath('//li/h3/text()').extract()
             # print level2
@@ -89,9 +120,9 @@ class IcibaSpider(scrapy.Spider):
         #          printhxs(td)
         # printhxs(str(text))
 
-        filename = 'word.iciba-%s.html' % page
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log('保存 Saved file %s' % filename)
+        # filename = 'word.iciba-%s.html' % page
+        # with open(filename, 'wb') as f:
+        #     f.write(response.body)
+        # self.log('保存 Saved file %s' % filename)
 
-        return allItems
+        # yield allItems

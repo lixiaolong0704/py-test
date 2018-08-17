@@ -1,11 +1,11 @@
 import scrapy
-
+from scrapy.spiders import CrawlSpider, Rule
 class QuotesSpider(scrapy.Spider):
     name = "test"
 
     def start_requests(self):
         urls = [
-            'http://www.24en.com/'
+            'http://word.iciba.com/?action=words&class=268&course=1'
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)

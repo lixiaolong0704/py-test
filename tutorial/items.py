@@ -24,6 +24,7 @@ class CategoryItem(Item):
     key = Field()
     parent = Field()
     tag = Field()
+    hasChild = Field()
 
 
 class WordItem(Item):
