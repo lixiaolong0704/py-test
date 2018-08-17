@@ -25,7 +25,22 @@ class TestPipeline(object):
         pass
 
     def process_item(self, item, spider):
-        return item
+        # print item
+        # print item['name']
+        # if item['word'] is not None:
+        #     print item['word']
+        try:
+            if item is None:
+                return None
+            if 'name' in item:
+                print item['name']
+
+            if 'word' in item:
+                print item['word']
+
+            return item
+        except Exception, e:
+            print 'fuck le' + str(e)
 
 
 class MongoWriterPipeline(object):

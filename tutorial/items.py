@@ -31,7 +31,7 @@ class CategoryItem(Item):
 
 class WordItem(Item):
     word = Field()
-    am = Field()
+    en = Field()
     em = Field()
     comment = Field()
     video = Field()

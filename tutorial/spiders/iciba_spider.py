@@ -54,7 +54,15 @@ class IcibaSpider(scrapy.Spider):
         # self.log('test file %s' % filename)
         classId = item['classId']
         courseCount = item['courseCount']
-        trans = {'currentCourseId': 1, 'itemIndex': 0}
+
+        wordBlocks = response.xpath('//ul[@class="word_main_list"]/li')
+        for wordBlock in wordBlocks:
+            item = WordItem()
+            item['word'] = wordBlock.xpath('./div[@class="word_main_list_w"]/span/text()').extract_first().strip()
+            item['en'] =  wordBlock.xpath('./div[@class="word_main_list_y"]/strong/text()').extract_first().strip()
+            item['comment'] = wordBlock.xpath('./div[@class="word_main_list_s"]/span/@title').extract_first().strip()
+
+            yield item
 
         if self.reqNext is not None:
             yield next(self.reqNext)
@@ -63,14 +71,14 @@ class IcibaSpider(scrapy.Spider):
         #                           meta={'item': item, 'trans': trans})
 
     def printItem(self, item):
-        print 'print:' + item['name']
-
+        # print 'print:' + item['name']
+        pass
     def reqAll(self,response):
         allitems = self.allitems
         for item in allitems:
             classId = item['classId']
-            # courseCount = item['courseCount']
-            courseCount = 5
+            courseCount = item['courseCount']
+            # courseCount = 5
             for x in range(courseCount):
                 print 'courseId:' + str(x+1)
                 yield response.follow(self.getCourseUrl(classId, x + 1), callback=self.parseCourse,

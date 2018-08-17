@@ -21,5 +21,8 @@ def test():
         yield x
 
 
-for a in test():
-    print a
+# for a in test():
+#     print a
+
+
+print {'sdfsdf':u'张三'}
