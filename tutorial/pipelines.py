@@ -53,7 +53,20 @@ class MongoWriterPipeline(object):
             self.categories.remove()
 
     def process_item(self, item, spider):
-        self.categories.insert(dict(item))
+
+        if item is None:
+            return None
+        if 'name' in item:
+            print item['name']
+            self.categories.insert(dict(item))
+            t = self.db[item['key']]
+            if t is not None:
+                t.remove()
+        if 'word' in item:
+            print item['word']
+            self.db[item['category']].insert(dict(item))
+
+
         return item
 
     def close_spider(self, spider):

@@ -74,8 +74,8 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'tutorial.pipelines.JsonWriterPipeline': 300,
-    'tutorial.pipelines.TestPipeline': 300
-    # 'tutorial.pipelines.MongoWriterPipeline': 300
+    # 'tutorial.pipelines.TestPipeline': 300
+    'tutorial.pipelines.MongoWriterPipeline': 300
 }
 HTTPERROR_ALLOWED_CODES = [400]
 

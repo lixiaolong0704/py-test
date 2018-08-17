@@ -46,26 +46,27 @@ class IcibaSpider(scrapy.Spider):
     def parseCourse(self, response):
         # filename = 'word.iciba-xx.html'
         # with open(filename, 'wb') as f:
-        item = response.meta['item']
-        # current_course_id = response.meta['currentCourseId']
-        # print '********************************' + item['name'] + str(item['classId']) + "---" + str(current_course_id)
-        print response.url
-        #     f.write(response.body)
-        # self.log('test file %s' % filename)
-        classId = item['classId']
-        courseCount = item['courseCount']
+        try:
+            cateItem = response.meta['item']
+            # current_course_id = response.meta['currentCourseId']
+            # print '********************************' + item['name'] + str(item['classId']) + "---" + str(current_course_id)
+            print response.url
+            courseId  = response.meta['courseId']
 
-        wordBlocks = response.xpath('//ul[@class="word_main_list"]/li')
-        for wordBlock in wordBlocks:
-            item = WordItem()
-            item['word'] = wordBlock.xpath('./div[@class="word_main_list_w"]/span/text()').extract_first().strip()
-            item['en'] =  wordBlock.xpath('./div[@class="word_main_list_y"]/strong/text()').extract_first().strip()
-            item['comment'] = wordBlock.xpath('./div[@class="word_main_list_s"]/span/@title').extract_first().strip()
+            wordBlocks = response.xpath('//ul[@class="word_main_list"]/li')
+            for wordBlock in wordBlocks:
+                item = WordItem()
+                item['word'] = wordBlock.xpath('./div[@class="word_main_list_w"]/span/text()').extract_first().strip()
+                item['en'] =  wordBlock.xpath('./div[@class="word_main_list_y"]/strong/text()').extract_first().strip()
+                item['comment'] = wordBlock.xpath('./div[@class="word_main_list_s"]/span/@title').extract_first().strip()
+                item['category'] = cateItem['key']
+                item['courseId'] = courseId
+                yield item
 
-            yield item
-
-        if self.reqNext is not None:
-            yield next(self.reqNext)
+            if self.reqNext is not None:
+                yield next(self.reqNext)
+        except Exception,e:
+            print str(e)
         # if current_course_id <= courseCount:
         #     yield response.follow(self.getCourseUrl(classId, current_course_id + 1), callback=self.parseCourse,
         #                           meta={'item': item, 'trans': trans})
@@ -82,7 +83,7 @@ class IcibaSpider(scrapy.Spider):
             for x in range(courseCount):
                 print 'courseId:' + str(x+1)
                 yield response.follow(self.getCourseUrl(classId, x + 1), callback=self.parseCourse,
-                                      meta={'item': item})
+                                      meta={'item': item,'courseId':x+1})
 
     def parse(self, response):
         page = response.url.split("/")[-2]

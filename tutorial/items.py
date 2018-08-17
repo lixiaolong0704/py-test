@@ -36,3 +36,4 @@ class WordItem(Item):
     comment = Field()
     video = Field()
     category = Field()
+    courseId = Field()
