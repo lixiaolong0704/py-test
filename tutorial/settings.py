@@ -11,6 +11,9 @@
 
 BOT_NAME = 'tutorial'
 
+LOG_ENABLED =False
+LOG_ENCODING ='utf-8'
+
 SPIDER_MODULES = ['tutorial.spiders']
 NEWSPIDER_MODULE = 'tutorial.spiders'
 
@@ -70,9 +73,9 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'tutorial.pipelines.JsonWriterPipeline': 300,
-    'tutorial.pipelines.TestPipeline': 300,
-    'tutorial.pipelines.MongoWriterPipeline': 300
+    # 'tutorial.pipelines.JsonWriterPipeline': 300,
+    'tutorial.pipelines.TestPipeline': 300
+    # 'tutorial.pipelines.MongoWriterPipeline': 300
 }
 HTTPERROR_ALLOWED_CODES = [400]
 

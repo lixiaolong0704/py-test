@@ -17,6 +17,7 @@ import re
 
 def test():
     for x in range(6):
+        print 'sht'+str(x)
         yield x
 
 

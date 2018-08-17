@@ -69,3 +69,154 @@ B级考试附加词汇:key_bjikaoshifujiacihui
 第八册:key_dibace
 第九册:key_dijiuce
 第十册:key_dishice
+第十一册:key_dishiyice
+河北版小学英语:key_hebeibanxiaoxueyingyu
+Student Book 1:key_studentbook1
+Student Book 2:key_studentbook2
+Student Book 3:key_studentbook3
+Student Book 4:key_studentbook4
+Student Book 5:key_studentbook5
+Student Book 6:key_studentbook6
+Student Book 7:key_studentbook7
+Student Book 8:key_studentbook8
+初中英语:key_chuzhongyingyu
+初中牛津版:key_chuzhongniujinban
+初一 上学期:key_chuyishangxueqi
+初一 下学期:key_chuyixiaxueqi
+初二 上学期:key_chuershangxueqi
+初二 下学期:key_chuerxiaxueqi
+初三 上学期:key_chusanshangxueqi
+初三 下学期:key_chusanxiaxueqi
+初中人教版:key_chuzhongrenjiaoban
+七年级上:key_qinianjishang
+七年级下:key_qinianjixia
+八年级上:key_banianjishang
+八年级下:key_banianjixia
+九年级:key_jiunianji
+仁爱版:key_renaiban
+七年级上册:key_qinianjishangce
+七年级下册:key_qinianjixiace
+八年级上册:key_banianjishangce
+八年级下册:key_banianjixiace
+九年级上册:key_jiunianjishangce
+九年级下册:key_jiunianjixiace
+初中河北版:key_chuzhonghebeiban
+Student Book 1:key_studentbook1
+Student Book 2:key_studentbook2
+Student Book 3:key_studentbook3
+Student Book 4:key_studentbook4
+Student Book 5:key_studentbook5
+Student Book 6:key_studentbook6
+新初中人教版:key_xinchuzhongrenjiaoban
+新初中人教版 八年级上:key_xinchuzhongrenjiaobanbanianjishang
+新初中人教版 八年级下:key_xinchuzhongrenjiaobanbanianjixia
+冀教版:key_jijiaoban
+九年级上册:key_jiunianjishangce
+高中英语:key_gaozhongyingyu
+高中牛津版:key_gaozhongniujinban
+高一 上学期:key_gaoyishangxueqi
+高一 下学期:key_gaoyixiaxueqi
+高二 上学期:key_gaoershangxueqi
+高二 下学期:key_gaoerxiaxueqi
+高三 上学期:key_gaosanshangxueqi
+高三 下学期:key_gaosanxiaxueqi
+高中人教版:key_gaozhongrenjiaoban
+必修1:key_bixiu1
+必修2:key_bixiu2
+必修3:key_bixiu3
+必修4:key_bixiu4
+必修5:key_bixiu5
+选修6:key_xuanxiu6
+选修7:key_xuanxiu7
+大学英语:key_daxueyingyu
+大学英语精读:key_daxueyingyujingdu
+大学英语(第一册):key_daxueyingyudiyice
+大学英语(第二册):key_daxueyingyudierce
+大学英语(第三册):key_daxueyingyudisance
+大学英语(第四册):key_daxueyingyudisice
+大学英语(第五册):key_daxueyingyudiwuce
+大学英语(第六册):key_daxueyingyudiliuce
+能力提升:key_nenglitisheng
+新概念英语:key_xingainianyingyu
+新概念英语1:key_xingainianyingyu1
+新概念英语2:key_xingainianyingyu2
+新概念英语3:key_xingainianyingyu3
+新概念英语4:key_xingainianyingyu4
+短语动词:key_duanyudongci
+要背就背有用单词:key_yaobeijiubeiyouyongdanci
+CNN student news:key_cnnstudentnews
+美国英语:key_meiguoyingyu
+初级(上册):key_chujishangce
+初级(下册):key_chujixiace
+中级(上册):key_zhongjishangce
+中级(下册):key_zhongjixiace
+高级:key_gaoji
+基础词汇:key_jichucihui
+Vocabulary 5000:key_vocabulary5000
+Vocabulary 22000:key_vocabulary22000
+Vocabulary 10000:key_vocabulary10000
+朗文2000释义词汇:key_langwen2000shiyicihui
+柯林斯星级词汇:key_kelinsixingjicihui
+五星级词表:key_wuxingjicibiao
+四星级词表:key_sixingjicibiao
+三星级词表:key_sanxingjicibiao
+二星级词表:key_erxingjicibiao
+一星级词表:key_yixingjicibiao
+牛津核心3000词汇:key_niujinhexin3000cihui
+牛津3000词汇（上）:key_niujin3000cihuishang
+牛津3000词汇（下）:key_niujin3000cihuixia
+行业词表:key_xingyecibiao
+医学英语:key_yixueyingyu
+第一册:key_diyice
+第二册:key_dierce
+第三册:key_disance
+计算机常用词汇:key_jisuanjichangyongcihui
+金融常用英语词汇:key_jinrongchangyongyingyucihui
+交友常用词汇:key_jiaoyouchangyongcihui
+求职常用词汇:key_qiuzhichangyongcihui
+人力资源词汇:key_renliziyuancihui
+外贸行业必备:key_waimaoxingyebibei
+建筑专业词汇:key_jianzhuzhuanyecihui
+化学（高分子）专业词汇:key_huaxuegaofenzizhuanyecihui
+优质生活:key_youzhishenghuo
+过年必用单词:key_guonianbiyongdanci
+身体各部位名称:key_shentigebuweimingcheng
+经典文学名著:key_jingdianwenxuemingzhu
+海蒂（上）:key_haidishang
+卡夫卡是谁:key_qiafuqiashishui
+哈利波特与魔法石:key_haliboteyumofashi
+海蒂（下）:key_haidixia
+哈利波特与阿兹卡班囚徒:key_haliboteyuaziqiabanqiutu
+哈利.波特与密室:key_haliboteyumishi
+木偶奇遇记（上）:key_muouqiyujishang
+木偶奇遇记（下）:key_muouqiyujixia
+ 一千零一夜 :key_yiqianlingyiye
+傲慢与偏见（上）:key_aomanyupianjianshang
+傲慢与偏见（下）:key_aomanyupianjianxia
+白城恶魔:key_baichengemo
+麦田守望者:key_maitianshouwangzhe
+小王子:key_xiaowangzi
+动物庄园:key_dongwuzhuangyuan
+1984:key_1984
+瓶中信:key_pingzhongxin
+权力游戏（第一册）:key_quanliyouxidiyice
+国境以南 太阳以西:key_guojingyinantaiyangyixi
+看美剧攻略:key_kanmeijugonglve
+生活常用词汇:key_shenghuochangyongcihui
+海外生活-美食篇:key_haiwaishenghuomeishipian
+海外生活-家居篇:key_haiwaishenghuojiajupian
+海外生活-气象篇:key_haiwaishenghuoqixiangpian
+旅行相关单词:key_lvxingxiangguandanci
+玩游戏必看:key_wanyouxibikan
+热门游戏词汇:key_remenyouxicihui
+各类游戏集锦:key_geleiyouxijijin
+英雄联盟常用词汇:key_yingxionglianmengchangyongcihui
+化妆品:key_huazhuangpin
+颜色:key_yanse
+动物:key_dongwu
+植物:key_zhiwu
+数学术语:key_shuxuezhuyu
+体育词汇集锦:key_tiyucihuijijin
+足球fans必看:key_zuqiufansbikan
+奥运会相关词:key_aoyunhuixiangguanci
+电话常用词汇:key_dianhuachangyongcihui

@@ -39,7 +39,6 @@ class MongoWriterPipeline(object):
 
     def process_item(self, item, spider):
         self.categories.insert(dict(item))
-
         return item
 
     def close_spider(self, spider):
