@@ -15,7 +15,7 @@ def getKey(cate):
 
 
 class IcibaSpider(scrapy.Spider):
-    name = "iciba"
+    name = "iciba_zzz"
 
     allowed_domains = ['word.iciba.com']
 
@@ -56,7 +56,7 @@ class IcibaSpider(scrapy.Spider):
             wordBlocks = response.xpath('//ul[@class="word_main_list"]/li')
             for wordBlock in wordBlocks:
                 item = WordItem()
-                item['word'] = wordBlock.xpath('./div[@class="word_main_list_w"]/span/text()').extract_first().strip()
+                item['word'] = wordBlock.xpath('./div[@class="word_main_list_w"]/span/@title').extract_first().strip()
                 item['en'] =  wordBlock.xpath('./div[@class="word_main_list_y"]/strong/text()').extract_first().strip()
                 item['comment'] = wordBlock.xpath('./div[@class="word_main_list_s"]/span/@title').extract_first().strip()
                 item['category'] = cateItem['key']

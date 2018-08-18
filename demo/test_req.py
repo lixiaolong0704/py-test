@@ -39,7 +39,7 @@ try:
     # print sys.getdefaultencoding()
     # print re.sub('[^\d]*', '', u'\u8bfe\u7a0b\u6570 226')
 
-    r = requests.get('http://word.iciba.com?action=words&class=268&course=1')
+    r = requests.get('http://www.iciba.com/comment')
     print(r.text)
 except KeyboardInterrupt:
     print('\n\nKeyboard exception received. Exiting.')
