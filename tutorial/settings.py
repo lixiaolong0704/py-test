@@ -11,7 +11,7 @@
 
 BOT_NAME = 'tutorial'
 
-LOG_ENABLED =False
+LOG_ENABLED =True
 LOG_ENCODING ='utf-8'
 
 SPIDER_MODULES = ['tutorial.spiders']
