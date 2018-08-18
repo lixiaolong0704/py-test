@@ -11,7 +11,7 @@
 
 BOT_NAME = 'tutorial'
 
-LOG_ENABLED =True
+LOG_ENABLED =False
 LOG_ENCODING ='utf-8'
 
 SPIDER_MODULES = ['tutorial.spiders']
@@ -63,7 +63,7 @@ DEFAULT_REQUEST_HEADERS = {
 #    'tutorial.middlewares.TutorialDownloaderMiddleware': 543,
 MEDIA_ALLOW_REDIRECTS =True
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy.downloadermiddlewares.redirect.RedirectMiddleware':None,
+    # 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware':None,
     'misc.middleware.CustomUserAgentMiddleware': 401
    # 'misc.middleware.CustomHttpProxyMiddleware': 400,
    #  'misc.middleware.CustomUserAgentMiddleware': 401,
@@ -80,7 +80,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'tutorial.pipelines.JsonWriterPipeline': 300,
-    # 'tutorial.pipelines.TestPipeline': 300
+    'tutorial.pipelines.UpdateWordPipeline': 300
     # 'tutorial.pipelines.MongoWriterPipeline': 300
 }
 HTTPERROR_ALLOWED_CODES = [400]

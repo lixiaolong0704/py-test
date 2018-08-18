@@ -61,5 +61,5 @@ class CustomUserAgentMiddleware(object):
         agent = random.choice(AGENTS)
         request.headers['User-Agent'] = agent
 
-        print "*****************"
-        print request.headers
+        # print "*****************"
+        # print request.headers

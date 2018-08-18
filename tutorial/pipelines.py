@@ -38,12 +38,41 @@ class TestPipeline(object):
 
             if 'word' in item:
                 # print item['word']
-                sys.stdout.write('x****'+item['word']+'----')
+                sys.stdout.write('x****' + item['word'] + '----')
                 sys.stdout.flush()
 
             return item
         except Exception, e:
             print 'fuck le' + str(e)
+
+
+class UpdateWordPipeline(object):
+
+    def __init__(self):
+        self.connection = MongoClient('localhost', 27017)
+        self.db = self.connection['moli_word']
+
+    def process_item(self, item, spider):
+
+        if item is None:
+            return None
+
+        if 'word' in item:
+            print item['word'] + item['category']
+            wordCollection = self.db[item['category']]
+            wordCollection.update_one(
+                {"_id": item['_id']},
+                {"$set":
+                     {'am': 'shit'}
+                 }
+            )
+
+            # self.db[item['category']].insert(dict(item))
+
+        return item
+
+    def close_spider(self, spider):
+        self.connection.close()
 
 
 class MongoWriterPipeline(object):
@@ -67,10 +96,9 @@ class MongoWriterPipeline(object):
                 t.remove()
         if 'word' in item:
             # print item['word']
-            sys.stdout.write(item['word']+',')
+            sys.stdout.write(item['word'] + ',')
             sys.stdout.flush()
             self.db[item['category']].insert(dict(item))
-
 
         return item
 

@@ -31,9 +31,11 @@ class CategoryItem(Item):
 
 class WordItem(Item):
     word = Field()
-    en = Field()
-    em = Field()
+    en = Field() #英音
+    am = Field() #美音
     comment = Field()
     video = Field()
     category = Field()
     courseId = Field()
+    _id = Field()
+    version = Field()
