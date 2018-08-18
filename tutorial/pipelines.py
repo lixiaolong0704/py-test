@@ -10,11 +10,24 @@ import codecs
 from utilities import toZh
 from pymongo import MongoClient
 import sys
+from scrapy.pipelines.files import FilesPipeline
 
 
 class TutorialPipeline(object):
     def process_item(self, item, spider):
         return item
+
+
+class MyFilePipeline(FilesPipeline):
+    currentItem = None
+
+    def process_item(self, item, spider):
+        self.currentItem = item
+        return super(MyFilePipeline, self).process_item(item, spider)
+
+    def file_path(self, request, response=None, info=None):
+        path = super(MyFilePipeline, self).file_path(request, response, info)
+        return path.replace('full', self.currentItem['category'])
 
 
 class TestPipeline(object):

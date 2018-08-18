@@ -79,8 +79,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'tutorial.pipelines.JsonWriterPipeline': 300,
-    'scrapy.pipelines.files.FilesPipeline': 200,
+    'tutorial.pipelines.MyFilePipeline': 200,
+    # 'scrapy.pipelines.files.FilesPipeline': 200,
     'tutorial.pipelines.UpdateWordPipeline': 300
 
     # 'tutorial.pipelines.MongoWriterPipeline': 300
@@ -113,4 +113,4 @@ HTTPERROR_ALLOWED_CODES = [400]
 
 
 
-FILES_STORE = './iciba_video'
+FILES_STORE = '/Users/lixiaolong/Documents/iciba_video'
