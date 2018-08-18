@@ -80,11 +80,16 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'tutorial.pipelines.JsonWriterPipeline': 300,
+    'scrapy.pipelines.files.FilesPipeline': 200,
     'tutorial.pipelines.UpdateWordPipeline': 300
+
     # 'tutorial.pipelines.MongoWriterPipeline': 300
+
 }
 HTTPERROR_ALLOWED_CODES = [400]
 
+# FILES_URLS_FIELD = 'en_video_urls'
+# FILES_RESULT_FIELD = 'test'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True
@@ -105,3 +110,7 @@ HTTPERROR_ALLOWED_CODES = [400]
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+
+FILES_STORE = './iciba_video'

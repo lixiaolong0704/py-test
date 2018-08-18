@@ -36,6 +36,13 @@ class WordItem(Item):
     en_video = Field()
     am_video = Field()
 
+    en_file = Field()
+    am_file = Field()
+
+    file_urls = scrapy.Field()
+    files = scrapy.Field()
+
+
 
     comment = Field()
 
