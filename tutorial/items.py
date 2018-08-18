@@ -14,11 +14,12 @@ class TutorialItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
 class CategoryItem(Item):
     # define the fields for your item here like:
     # name = Field()
     name = Field()
-    wordCount= Field()
+    wordCount = Field()
     courseCount = Field()
     classId = Field()
     key = Field()
@@ -27,15 +28,21 @@ class CategoryItem(Item):
     hasChild = Field()
 
 
-
-
 class WordItem(Item):
     word = Field()
-    en = Field() #英音
-    am = Field() #美音
+
+    en = Field()  # 英音
+    am = Field()  # 美音
+    en_video = Field()
+    am_video = Field()
+
+
     comment = Field()
-    video = Field()
+
     category = Field()
     courseId = Field()
     _id = Field()
     version = Field()
+
+    # 变形 object
+    change = Field()

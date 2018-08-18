@@ -60,15 +60,15 @@ class UpdateWordPipeline(object):
         if 'word' in item:
             print item['word'] + item['category']
             wordCollection = self.db[item['category']]
-            wordCollection.update_one(
-                {"_id": item['_id']},
-                {"$set":
-                     {'am': 'shit'}
-                 }
-            )
-
-            # self.db[item['category']].insert(dict(item))
-
+            # wordCollection.update_one(
+            #     {"_id": item['_id']},
+            #     {"$set":
+            #         {
+            #             'am': 'shit',
+            #             'change':item['change']
+            #         }
+            #     }
+            # )
         return item
 
     def close_spider(self, spider):
