@@ -7,7 +7,7 @@ from ..items import *
 
 class IcibaQuerySpider(scrapy.Spider):
     name = "iciq"
-    currentVersion='v1.1'
+    currentVersion='v1.1.3'
     def find_cate(self, cate):
         currentCate = self.db[cate['key']]
         for word in currentCate.find():
