@@ -9,11 +9,31 @@ import json
 import codecs
 from utilities import toZh
 from pymongo import MongoClient
+import sys
+from scrapy.pipelines.files import FilesPipeline
 
 
 class TutorialPipeline(object):
+
+
     def process_item(self, item, spider):
         return item
+
+
+class MyFilePipeline(FilesPipeline):
+    currentItem = None
+    # def media_to_download(self, request, info):
+    #     """Check request before starting download"""
+    #
+
+    def process_item(self, item, spider):
+        self.currentItem = item
+        return super(MyFilePipeline, self).process_item(item, spider)
+
+    def file_path(self, request, response=None, info=None):
+        path = super(MyFilePipeline, self).file_path(request, response, info)
+        sub = 'en' if  self.currentItem['file_urls'][0] ==request.url else 'am'
+        return path.replace('full', self.currentItem['category']+'-'+sub)
 
 
 class TestPipeline(object):
@@ -36,11 +56,59 @@ class TestPipeline(object):
                 print item['name']
 
             if 'word' in item:
-                print item['word']
+                # print item['word']
+                sys.stdout.write('x****' + item['word'] + '----')
+                sys.stdout.flush()
 
             return item
         except Exception, e:
             print 'fuck le' + str(e)
+
+
+class UpdateWordPipeline(object):
+
+    def __init__(self):
+        self.connection = MongoClient('localhost', 27017)
+        self.db = self.connection['moli_word']
+
+    def process_item(self, item, spider):
+
+
+
+        if item is None:
+            return item
+
+        if 'word' in item:
+
+            try:
+                if 'file_urls' in item:
+                    item['en_file'] = item['files'][0]
+                    item['am_file'] = item['files'][1]
+                print item['word']
+                if 'category' in item:
+
+                    wordCollection = self.db[item['category']]
+                    wordCollection.update_one(
+                        {"_id": item['_id']},
+                        {"$set":
+                            {
+                                'en': item['en'],
+                                'am': item['am'],
+                                'en_video': item['en_video'],
+                                'am_video': item['am_video'],
+                                'en_file': item['en_file'],
+                                'am_file': item['am_file'],
+                                'change': item['change'],
+                                'version': item['version']
+                            }
+                        }
+                    )
+            except Exception,e:
+                print str(e)
+        return item
+
+    def close_spider(self, spider):
+        self.connection.close()
 
 
 class MongoWriterPipeline(object):
@@ -63,9 +131,10 @@ class MongoWriterPipeline(object):
             if t is not None:
                 t.remove()
         if 'word' in item:
-            print item['word']
+            # print item['word']
+            sys.stdout.write(item['word'] + ',')
+            sys.stdout.flush()
             self.db[item['category']].insert(dict(item))
-
 
         return item
 

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from  .. utilities import printhxs
-
+from pymongo import MongoClient
 class QuotesSpider(scrapy.Spider):
     name = "bjh"
 
+
+
     def start_requests(self):
+
+
         urls = [
             'http://bxjg.circ.gov.cn/web/site0/tab5203/info4112314.htm' 
         ]

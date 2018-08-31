@@ -31,7 +31,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 0.02
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -44,12 +44,11 @@ COOKIES_ENABLED = True
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7',
-    'Host': 'word.iciba.com',
-    'User-Agent': 'python-requests/2.19.1',
-    'Cache-Control':'no-cache',
-    'Content-Type':'text/html;charset=utf-8;'
+    # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+    # 'Host': 'word.iciba.com',
+    # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+    # 'Cache-Control':'no-cache',
+    # 'Content-Type':'text/html',
 }
 
 # Enable or disable spider middlewares
@@ -62,7 +61,14 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
 #    'tutorial.middlewares.TutorialDownloaderMiddleware': 543,
-# }
+MEDIA_ALLOW_REDIRECTS =True
+DOWNLOADER_MIDDLEWARES = {
+    # 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware':None,
+    'misc.middleware.CustomUserAgentMiddleware': 401
+   # 'misc.middleware.CustomHttpProxyMiddleware': 400,
+   #  'misc.middleware.CustomUserAgentMiddleware': 401,
+}
+
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -73,12 +79,17 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'tutorial.pipelines.JsonWriterPipeline': 300,
-    # 'tutorial.pipelines.TestPipeline': 300
-    'tutorial.pipelines.MongoWriterPipeline': 300
+    'tutorial.pipelines.MyFilePipeline': 200,
+    # 'scrapy.pipelines.files.FilesPipeline': 200,
+    'tutorial.pipelines.UpdateWordPipeline': 300
+
+    # 'tutorial.pipelines.MongoWriterPipeline': 300
+
 }
 HTTPERROR_ALLOWED_CODES = [400]
 
+# FILES_URLS_FIELD = 'en_video_urls'
+# FILES_RESULT_FIELD = 'test'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True
@@ -99,3 +110,7 @@ HTTPERROR_ALLOWED_CODES = [400]
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+
+FILES_STORE = '/Users/lixiaolong/Documents/iciba_video'

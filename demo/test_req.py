@@ -6,6 +6,8 @@ import re
 import sys
 # r = requests.get('https://api.github.com/events')
 # print(r.text)
+from pymongo import MongoClient
+
 
 def test():
     print('Before: %s' % time.ctime())
@@ -38,9 +40,17 @@ try:
     # print '中文'.decode('utf8')
     # print sys.getdefaultencoding()
     # print re.sub('[^\d]*', '', u'\u8bfe\u7a0b\u6570 226')
+    #
+    # r = requests.get('http://www.iciba.com/comment')
+    # print(r.text)
 
-    r = requests.get('http://word.iciba.com?action=words&class=268&course=1')
-    print(r.text)
+    connection = MongoClient('localhost', 27017)
+    db = connection['moli_word']
+    categories = db['categories']
+    for cate in categories.find():
+        print cate['name']
+
+
 except KeyboardInterrupt:
     print('\n\nKeyboard exception received. Exiting.')
     exit()
